@@ -23,7 +23,7 @@
   <div class="row">
   <?php include '../../src/layouts/Admin/admin.php' ?>
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    <form action="action.php?id=<?php echo $id; ?>" method="post">
+  <form method="POST" action="action.php" enctype="multipart/form-data">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Edit Main Category</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -42,6 +42,7 @@
         <?php 
             while ($row = mysqli_fetch_assoc($result)) {
         ?>
+         <input type="hidden" name="id" value="<?= $row['Sub1CategoryID'] ?? '' ?>">
         <div class="mb-3 px-1">
             <label for="Sub1CategoryNameEN" class="form-label">Category Title(EN)</label>
             <input type="text" class="form-control" id="Sub1CategoryNameEN" name="Sub1CategoryNameEN" value="<?php echo $row['Sub1CategoryNameEN']; ?>">
@@ -66,6 +67,11 @@
                 ?>
             </select>
         </div>
+        <div class="mb-3 px-1">
+            <label for="Categoryimage" class="form-label">Categoryimage</label>
+            <input type="file" name="Categoryimage" id="Categoryimage" class="form-control" value="<?php echo $row['Categoryimage']; ?>">
+        </div>
+        <img id="preview-image" width="100%" class="mb-2">
         <?php } ?>
         </table>
       </div>
@@ -75,5 +81,23 @@
 </div>
 
 <?php include  '../../src/layouts/Admin/js.php' ?>
+<script src="../../public/js/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+        // Preview image
+        $('#image').change(function() {
+
+            let reader = new FileReader();
+
+            reader.onload = (e) => {
+                $('#preview-image').attr('src', e.target.result);
+                $("#errorMs").hide();
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+
+    });
+</script>
 </body>
 </html>

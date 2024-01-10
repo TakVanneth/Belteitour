@@ -10,6 +10,11 @@
     <script src="../../assets/js/color-modes.js"></script>
   <link href="./../../public/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="./../../public/css/dashboard.css" rel="stylesheet">
+<style>
+  img {
+    width: 100px;
+  }
+</style>
   </head>
   <body>
   <?php include '../../src/layouts/Admin/icon.php' ?>
@@ -37,6 +42,7 @@
         <table class="table table-striped table-sm">
           <thead>
             <tr>
+              <th scope="col">Image</th>
               <th scope="col">ID</th>
               <th scope="col">Category Title(KH)</th>
               <th scope="col">Category Title(EN)</th>
@@ -48,6 +54,7 @@
             <?php 
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr>";
+                echo '<td><img src="./../../public/uploads/' . $row['Categoryimage'] . '" alt=""></td>';
                 echo "<td>" . $row['MainCategoryID'] . "</td>";
                 echo "<td>" . $row['mainCategoryTitleKH'] . "</td>";
                 echo "<td>" . $row['mainCategoryTitleEN'] . "</td>";

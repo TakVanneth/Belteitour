@@ -14,7 +14,7 @@
         Please click image below for more details<br><br>
         Congratulations on the Weekend Trip of BELTEI Group<br><br>
         Management Team to Sihanoukville by traveling on the PPSHV Expressway
-    </p><br>
+    </p><br/>
 </div>
 <div>
 <table style="padding:0px; width:100%;">

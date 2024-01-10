@@ -1,9 +1,9 @@
 <style>
-    .container{
-        padding: 0px 0px 10px 0px ;
+    .header{
+        padding-bottom: 10px;
     }
 </style>
-<div class="container">
+<div class="container header">
     <img src="public/img/logo.jpg" alt="" style="width: 100%;">
 </div>
     <hr>

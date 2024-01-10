@@ -1,6 +1,6 @@
 <?php 
     include './../../Connection/conn.php';
-    $query = "SELECT s.Sub1CategoryID, s.Sub1CategoryNameKH, s.Sub1CategoryNameEN, s.MainCategoryID, s.Date, m.mainCategoryTitleEN
+    $query = "SELECT s.Sub1CategoryID, s.Sub1CategoryNameKH, s.Sub1CategoryNameEN, s.DatePost, s.Categoryimage , s.MainCategoryID, s.Date, m.mainCategoryTitleEN
     FROM Sub1Category_tbl s
     LEFT JOIN MainCategory_tbl m ON s.MainCategoryID = m.MainCategoryID";
 
@@ -40,10 +40,12 @@ $result = mysqli_query($conn, $query);
           <thead>
             <tr>
               <th scope="col">ID</th>
+              <th scope="col">img</th>
               <th scope="col">Categiry Name(KH)</th>
               <th scope="col">Categiry Name(EN)</th>
+              <th scope="col">DatePost</th>
               <th scope="col">Main Category</th>
-              <th scope="col">Date Post</th>
+              <th scope="col">Date</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -51,9 +53,11 @@ $result = mysqli_query($conn, $query);
           <?php
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr>";
+                echo '<td><img src="./../../public/uploads/' . $row['Categoryimage'] . '" alt="" style="width: 75px;"></td>';
                 echo "<td>" . $row['Sub1CategoryID'] . "</td>";
                 echo "<td>" . $row['Sub1CategoryNameKH'] . "</td>";
                 echo "<td>" . $row['Sub1CategoryNameEN'] . "</td>";
+                echo "<td>" . $row['DatePost'] . "</td>";
                 echo "<td>";
 
                 if ($row['mainCategoryTitleEN'] !== null) {
@@ -77,6 +81,5 @@ $result = mysqli_query($conn, $query);
 </div>
 
 <?php include  '../../src/layouts/Admin/js.php' ?>
-
 </body>
 </html>

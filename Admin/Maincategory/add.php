@@ -17,7 +17,7 @@
   <div class="row">
   <?php include '../../src/layouts/Admin/admin.php' ?>
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    <form action="action.php" method="post">
+    <form action="action.php" method="post" enctype="multipart/form-data">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Add Main Category</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -41,6 +41,11 @@
             <label for="mainCategoryTitleEN" class="form-label">Category Title(EN)</label>
             <input type="text" class="form-control" id="mainCategoryTitleEN" name="mainCategoryTitleEN">
         </div>
+        <div class="mb-3 px-1">
+            <label for="Categoryimage" class="form-label">Category images</label>
+            <input type="file" class="form-control" id="Categoryimage" name="Categoryimage" required>
+        </div>
+        <img id="preview-image" width="100%" class="mb-2">
         </table>
       </div>
     </main>
@@ -49,5 +54,24 @@
 </div>
 
 <?php include  '../../src/layouts/Admin/js.php' ?>
+<script src="../../public/js/jquery.min.js"></script>
+<script>
+    
+    $(document).ready(function() {
+
+        // Preview image
+        $('#Categoryimage').change(function() {
+
+            let reader = new FileReader();
+
+            reader.onload = (e) => {
+                $('#preview-image').attr('src', e.target.result);
+                $("#errorMs").hide();
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+
+    });
+</script>
 </body>
 </html>
