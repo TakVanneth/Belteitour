@@ -30,23 +30,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['insert'])) {
         echo "Error uploading file.";
     }
 }
-
-// Delete record by ID
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = $_GET['id'];
 
-    $sql = "DELETE FROM MainCategory_tbl WHERE mainCategoryID = ?";
-
-    $stmt = $conn->prepare($sql);
+    // Fetch the image file name to delete later
+    $fetchQuery = "SELECT Categoryimage FROM MainCategory_tbl WHERE mainCategoryID = ?";
+    $stmt = $conn->prepare($fetchQuery);
     $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $imageFile = $result->fetch_assoc()['Categoryimage'];
+    $stmt->close();
 
-    if ($stmt->execute()) {
-        echo '<script>window.location.href = "index.php";</script>';
+    // Delete the record from the table
+    $deleteQuery = "DELETE FROM MainCategory_tbl WHERE mainCategoryID = ?";
+    $deleteStmt = $conn->prepare($deleteQuery);
+    $deleteStmt->bind_param("i", $id);
+
+    if ($deleteStmt->execute()) {
+        // If the deletion from the table was successful, delete the associated image file
+        $filePath = "./../../public/uploads/" . $imageFile;
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        echo '<script>
+        alert("Items have been deleted");
+        window.location.href = "index.php";
+        </script>';
     } else {
         echo "Error deleting record: " . $conn->error;
     }
 
-    $stmt->close();
+    $deleteStmt->close();
 }
 
 // Update existing record
