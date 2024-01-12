@@ -1,10 +1,17 @@
 <?php 
+    session_start();
+    if (!isset($_SESSION['userID'])) {
+      header('Location: ../login.php');
+      exit();
+    }
     include './../../Connection/conn.php';
-    $query = "SELECT s.Sub1CategoryID, s.Sub1CategoryNameKH, s.Sub1CategoryNameEN, s.DatePost, s.Categoryimage , s.MainCategoryID, s.Date, m.mainCategoryTitleEN
+    // $query = "SELECT s.Sub1CategoryID, s.Sub1CategoryNameKH, s.Sub1CategoryNameEN, s.DatePost, s.Categoryimage , s.MainCategoryID, s.Date, m.mainCategoryTitleEN
+    // FROM Sub1Category_tbl s
+    // LEFT JOIN MainCategory_tbl m ON s.MainCategoryID = m.MainCategoryID ORDER BY sort_order DESC";
+    $query = "SELECT s.Sub1CategoryID, s.Sub1CategoryNameKH, s.Sub1CategoryNameEN, s.DatePost, s.sort_order, s.Categoryimage, s.MainCategoryID, s.Date, m.mainCategoryTitleEN
     FROM Sub1Category_tbl s
-    LEFT JOIN MainCategory_tbl m ON s.MainCategoryID = m.MainCategoryID";
-
-$result = mysqli_query($conn, $query);
+    LEFT JOIN MainCategory_tbl m ON s.MainCategoryID = m.MainCategoryID ORDER BY sort_order DESC";   
+    $result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
@@ -43,6 +50,7 @@ $result = mysqli_query($conn, $query);
               <th scope="col">img</th>
               <th scope="col">Categiry Name(KH)</th>
               <th scope="col">Categiry Name(EN)</th>
+              <th scope="col">sort_order</th>
               <th scope="col">DatePost</th>
               <th scope="col">Main Category</th>
               <th scope="col">Date</th>
@@ -57,6 +65,7 @@ $result = mysqli_query($conn, $query);
                 echo "<td>" . $row['Sub1CategoryID'] . "</td>";
                 echo "<td>" . $row['Sub1CategoryNameKH'] . "</td>";
                 echo "<td>" . $row['Sub1CategoryNameEN'] . "</td>";
+                echo "<td>" . $row['sort_order'] . "</td>";
                 echo "<td>" . $row['DatePost'] . "</td>";
                 echo "<td>";
 

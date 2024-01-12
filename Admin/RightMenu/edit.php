@@ -1,4 +1,9 @@
 <?php 
+    session_start();
+    if (!isset($_SESSION['userID'])) {
+      header('Location: ../login.php');
+      exit();
+    }
     include './../../Connection/conn.php';
     if(isset($_GET['id']) && !empty($_GET['id'])) {
         $id = $_GET['id'];
@@ -13,7 +18,7 @@
     <?php include '../../src/layouts/Admin/script.php' ?>
     <script src="../../assets/js/color-modes.js"></script>
   <link href="./../../public/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="./../../public/css/dashboard.css" rel="stylesheet">
+  <link href="./../../public/css/dashboard.css" rel="stylesheet">
   </head>
   <body>
   <?php include '../../src/layouts/Admin/icon.php' ?>
@@ -24,7 +29,6 @@
   <?php include '../../src/layouts/Admin/admin.php' ?>
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <form method="POST" action="action.php" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?= $row['$id '] ?>">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Edit Main items</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
@@ -43,6 +47,7 @@
         <?php 
             while ($row = mysqli_fetch_assoc($result)) {
         ?>
+        <input type="hidden" name="id" value="<?= $row['MainID'] ?>">
         <div class="mb-3 px-1">
             <label for="title" class="form-label">title</label>
             <input type="text" class="form-control" id="title" name="title" value="<?php echo $row['title']; ?>">

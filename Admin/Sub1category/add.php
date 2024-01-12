@@ -1,4 +1,9 @@
 <?php 
+    session_start();
+    if (!isset($_SESSION['userID'])) {
+      header('Location: ../login.php');
+      exit();
+    }
     include './../../Connection/conn.php';
 ?>
 <!DOCTYPE html>
@@ -37,10 +42,10 @@
             <label for="Sub1CategoryNameKH" class="form-label">Category Title(KH)</label>
             <input type="text" class="form-control" id="Sub1CategoryNameKH" name="Sub1CategoryNameKH">
         </div>
-        <!-- <div class="mb-3 px-1">
-            <label for="Sub1CategoryNameEN" class="form-label">Category Title(EN)</label>
-            <input type="text" class="form-control" id="Sub1CategoryNameEN" name="Sub1CategoryNameEN">
-        </div> -->
+        <div class="mb-3 px-1">
+            <label for="sort_order" class="form-label">sort_order</label>
+            <input type="text" class="form-control" id="sort_order" name="sort_order">
+        </div>
         Sub1CategoryNameEN:
         <textarea cols="30" rows="5" id="Description" name="Sub1CategoryNameEN">
 

@@ -1,4 +1,9 @@
 <?php 
+    session_start();
+    if (!isset($_SESSION['userID'])) {
+      header('Location: ../login.php');
+      exit();
+    }
     include './../../Connection/conn.php';
     if(isset($_GET['id']) && !empty($_GET['id'])) {
         $id = $_GET['id'];
@@ -50,6 +55,10 @@
         <div class="mb-3 px-1">
             <label for="mainCategoryTitleEN" class="form-label">Category Title(EN)</label>
             <input type="text" class="form-control" id="mainCategoryTitleEN" name="mainCategoryTitleEN" value="<?php echo $row['mainCategoryTitleEN']; ?>">
+        </div>
+        <div class="mb-3 px-1">
+            <label for="sort_order" class="form-label">sort_order</label>
+            <input type="text" class="form-control" id="sort_order" name="sort_order" value="<?php echo $row['sort_order']; ?>">
         </div>
         <div class="mb-3 px-1">
             <label for="Categoryimage" class="form-label">Category images</label>

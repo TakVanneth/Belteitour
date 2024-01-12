@@ -4,6 +4,7 @@ include './../../Connection/conn.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['insert'])) {
     $Sub1CategoryNameKH = $_POST['Sub1CategoryNameKH'];
     $Sub1CategoryNameEN = $_POST['Sub1CategoryNameEN'];
+    $sort_order = $_POST['sort_order'];
     $DatePost = $_POST['DatePost'];
     $MainCategoryID = $_POST['MainCategoryID'];
 
@@ -16,9 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['insert'])) {
     $targetFilePath = $targetDirectory . $newFileName;
 
     if (move_uploaded_file($tempName, $targetFilePath)) {
-        $query = "INSERT INTO Sub1Category_tbl (Sub1CategoryNameKH, Sub1CategoryNameEN, MainCategoryID, DatePost, Categoryimage) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO Sub1Category_tbl (Sub1CategoryNameKH, Sub1CategoryNameEN, MainCategoryID, sort_order, DatePost, Categoryimage) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("ssiss", $Sub1CategoryNameKH, $Sub1CategoryNameEN, $MainCategoryID, $DatePost, $newFileName);
+        $stmt->bind_param("ssiiss", $Sub1CategoryNameKH, $Sub1CategoryNameEN, $MainCategoryID, $sort_order, $DatePost, $newFileName);
 
         if ($stmt->execute()) {
             echo '<script>window.location.href = "index.php";</script>';
@@ -52,6 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $id = $_POST['id'];
     $Sub1CategoryNameKH = $_POST['Sub1CategoryNameKH'];
     $Sub1CategoryNameEN = $_POST['Sub1CategoryNameEN'];
+    $sort_order = $_POST['sort_order'];
+    $DatePost = $_POST['DatePost'];
     $MainCategoryID = $_POST['MainCategoryID'];
 
     // File upload handling
@@ -83,18 +86,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         // Move uploaded file to target directory
         if (move_uploaded_file($tempName, $targetFilePath)) {
             // Update query with new file
-            $updateQuery = "UPDATE Sub1Category_tbl SET Sub1CategoryNameKH = ?, Sub1CategoryNameEN = ?, MainCategoryID = ?, Categoryimage = ? WHERE Sub1CategoryID = ?";
+            $updateQuery = "UPDATE Sub1Category_tbl SET Sub1CategoryNameKH = ?, Sub1CategoryNameEN = ?, sort_order = ?, DatePost = ?, MainCategoryID = ?, Categoryimage = ? WHERE Sub1CategoryID = ?";
             $stmt = $conn->prepare($updateQuery);
-            $stmt->bind_param("ssisi", $Sub1CategoryNameKH, $Sub1CategoryNameEN, $MainCategoryID, $newFileName, $id);
+            $stmt->bind_param("ssiissi", $Sub1CategoryNameKH, $Sub1CategoryNameEN, $sort_order, $DatePost, $MainCategoryID, $newFileName, $id);
         } else {
             echo "Error uploading file.";
             exit();
         }
     } else {
         // Update query without changing the file
-        $updateQuery = "UPDATE Sub1Category_tbl SET Sub1CategoryNameKH = ?, Sub1CategoryNameEN = ?, MainCategoryID = ? WHERE Sub1CategoryID = ?";
+        $updateQuery = "UPDATE Sub1Category_tbl SET Sub1CategoryNameKH = ?, Sub1CategoryNameEN = ?, sort_order = ?, DatePost = ?, MainCategoryID = ? WHERE Sub1CategoryID = ?";
         $stmt = $conn->prepare($updateQuery);
-        $stmt->bind_param("ssii", $Sub1CategoryNameKH, $Sub1CategoryNameEN, $MainCategoryID, $id);
+        $stmt->bind_param("ssisii", $Sub1CategoryNameKH, $Sub1CategoryNameEN, $sort_order, $DatePost, $MainCategoryID, $id);
     }
 
     // Execute the update query

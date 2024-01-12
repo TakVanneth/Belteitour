@@ -1,7 +1,13 @@
 <?php 
+    session_start();
+    if (!isset($_SESSION['userID'])) {
+      header('Location: ../login.php');
+      exit();
+    }
     include './../../Connection/conn.php';
-    $query = "SELECT * FROM MainCategory_tbl";
+    $query = "SELECT * FROM MainCategory_tbl ORDER BY sort_order DESC";
     $result = mysqli_query($conn, $query);
+    
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
@@ -46,6 +52,7 @@
               <th scope="col">ID</th>
               <th scope="col">Category Title(KH)</th>
               <th scope="col">Category Title(EN)</th>
+              <th scope="col">sort_order</th>
               <th scope="col">Date Post</th>
               <th scope="col">Action</th>
             </tr>
@@ -58,6 +65,7 @@
                 echo "<td>" . $row['MainCategoryID'] . "</td>";
                 echo "<td>" . $row['mainCategoryTitleKH'] . "</td>";
                 echo "<td>" . $row['mainCategoryTitleEN'] . "</td>";
+                echo "<td>" . $row['sort_order'] . "</td>";
                 echo "<td>" . $row['Date'] . "</td>";
                 echo "<td>" . "<a href='edit.php?id=" . $row['MainCategoryID'] . "'>Edit</a>" 
                 . " | <a href='action.php?id=" . $row['MainCategoryID'] . "' onclick=\"return confirm('Do you want to delete this Category?')\">Delete</a>" . "</td>";

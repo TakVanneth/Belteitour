@@ -1,21 +1,20 @@
 <style>
     .sidebarRight {
         background: #dfe9ce;
+        text-align: center;
     }
-    .sidebarRight img {
-        width: 90%;
+    center img {
+        width: 93%;
         margin: 0 auto;
         display: block; 
     }
-    .link-wrapper {
-        margin-bottom: 10px;
+    .menu img {
+        width: 85%;
+        margin: 0 auto;
+        display: block; 
     }
     .main-container {
-        /* margin-left: 9px; */
-        margin-right: 9px;
-    }
-    .menu {
-        margin-top: 5px;
+        margin-top: 10px;
     }
 </style>
 <?php
@@ -26,9 +25,10 @@ $resultMain = mysqli_query($conn, $queryMain);
 
 echo '<div class="sidebarRight">'; // Opening div for Right sidebar
 echo '<div><center><a href=""><img src="./public/img/sr9.gif" border="0"></a></center></div>';
-echo '<div><center><a href="https://belteigroup.com.kh/index2.htm"><img src="./public/img/sr3.png" border="0"></a></center></div>';
 echo '<div class="menu">'; 
 while ($rowMain = mysqli_fetch_assoc($resultMain)) {
+    echo '<div><center><a href="https://belteigroup.com.kh/index2.htm"><img src="./public/img/sr3.png" border="0"></a></center></div>';
+
     echo '<div class="main-container">'; // Use a different class for the main container
     echo '<img src="./public/RightMenuimg/' . $rowMain['image'] . '" alt="">';
 

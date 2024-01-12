@@ -20,20 +20,20 @@
         }
         body {
             background: #7BA46A;
-            width: 970px;
+            width: 980px;
             margin: 0 auto;
             margin-top: 25px;
         }
-        .left {
-            border-right: 0.5px solid #7BA46A;
-        }
-        .header {
-            /* padding-top: 3px !important; */
+        .content {
+            border-top: 0.5px dashed #7BA46A;
+            padding-left: 0;
+            padding-right: 0;
         }
     </style>
 </head>
 <body>
     <header class="container header" id="header">
+     <a href="<?=getFullUrl('Admin/')?>">Admin</a>
     <?php include_once 'src/layouts/Home/Header.php'; ?>
     </div>
     </header>
@@ -41,10 +41,9 @@
         <div class="container home">
             <div class="row">
                 <div class="col-3 left">
-                    <a href="<?=getFullUrl('Admin/')?>">Admin</a>
                     <?php include './src/layouts/Home/SidebarLeft.php' ?>
                 </div>
-                <div class="col-6">
+                <div class="col-6 content">
                     <?php include_once './src/layouts/Home/Content.php' ?>
                 </div>
                 <div class="col-3 right">

@@ -1,4 +1,12 @@
-<?php include_once './../constants.php'; ?>
+<?php 
+    session_start();
+
+    if (!isset($_SESSION['userID'])) {
+        header('Location: login.php');
+        exit();
+}
+include_once './../constants.php';
+?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
