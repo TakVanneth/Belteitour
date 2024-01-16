@@ -25,9 +25,8 @@
         <option value="Khmer">Khmer</option>
       </select>
     </div>
-    <!-- Icon mail and notification and select English and Khmer -->
     <div class="profile-picture me-3">
-    <img src="https://scontent.fpnh10-1.fna.fbcdn.net/v/t39.30808-1/354568109_810348657377735_5831354654215781832_n.jpg?stp=dst-jpg_p320x320&_nc_cat=105&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFVHtbiJZZg4ipyHPTZwDr1YYt0TMleu09hi3RMyV67TxwanhvrZ9qd9rDX5nwd39Kcmwkdwwm8Fb2BU8E8sFY2&_nc_ohc=EeqSjgKtYKAAX_Ct3IK&_nc_ht=scontent.fpnh10-1.fna&oh=00_AfATbwXYKnhLYg4Qrgf8tyj1yAYDdnFiVYe4VrrT1QEs9w&oe=659C0726" class="rounded-circle" style="width: 40px; height: 40px;">
+    <img src="http://127.0.0.1:8000/User/profile_1.jpeg" class="rounded-circle" style="width: 40px; height: 40px;">
   </div>
     <div class="me-1"></div>
     <ul class="navbar-nav flex-row d-md-none">

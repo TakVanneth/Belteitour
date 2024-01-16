@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    if (!isset($_SESSION['userID'])) {
+    if (!isset($_SESSION['userID']))  {
       header('Location: ../login.php');
       exit();
     }
@@ -35,7 +35,10 @@
         <h1 class="h2">Main Category</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?=getFullUrl('Admin/Maincategory/add.php')?>">Add</a></button>
+            <!-- <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?=getFullUrl('Admin/Maincategory/add.php')?>">Add</a></button> -->
+            <?php if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Manager') {
+                echo '<button type="button" class="btn btn-sm btn-outline-secondary"><a href="' . getFullUrl('Admin/Maincategory/add.php') . '">Add</a></button>';
+            } ?>
             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
           </div>
           <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
@@ -54,11 +57,13 @@
               <th scope="col">Category Title(EN)</th>
               <th scope="col">sort_order</th>
               <th scope="col">Date Post</th>
+              <?php if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Manager') { ?>
               <th scope="col">Action</th>
+              <?php } ?>
             </tr>
           </thead>
           <tbody>
-            <?php 
+          <?php 
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr>";
                 echo '<td><img src="./../../public/uploads/' . $row['Categoryimage'] . '" alt=""></td>';
@@ -67,10 +72,14 @@
                 echo "<td>" . $row['mainCategoryTitleEN'] . "</td>";
                 echo "<td>" . $row['sort_order'] . "</td>";
                 echo "<td>" . $row['Date'] . "</td>";
-                echo "<td>" . "<a href='edit.php?id=" . $row['MainCategoryID'] . "'>Edit</a>" 
-                . " | <a href='action.php?id=" . $row['MainCategoryID'] . "' onclick=\"return confirm('Do you want to delete this Category?')\">Delete</a>" . "</td>";
+
+                if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Manager') {
+                    echo "<td>" . "<a href='edit.php?id=" . $row['MainCategoryID'] . "'>Edit</a>" 
+                        . " | <a href='action.php?id=" . $row['MainCategoryID'] . "' onclick=\"return confirm('Do you want to delete this Category?')\">Delete</a>" . "</td>";
+                }
+
                 echo "</tr>";
-            }            
+            }
             ?>
           </tbody>
         </table>

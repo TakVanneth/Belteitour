@@ -1,9 +1,14 @@
 <?php 
     session_start();
-    if (!isset($_SESSION['userID'])) {
-      header('Location: ../login.php');
+    // if (!isset($_SESSION['userID'])) {
+    //   header('Location: ../login.php');
+    //   exit();
+    // }
+    if (!isset($_SESSION['userID']) || (isset($_SESSION['role']) && ($_SESSION['role'] !== 'Admin' && $_SESSION['role'] !== 'Manager'))) {
+      header('Location: index.php');
       exit();
     }
+    
     include './../../Connection/conn.php';
     if(isset($_GET['id']) && !empty($_GET['id'])) {
         $id = $_GET['id'];

@@ -4,7 +4,7 @@
         text-align: center;
     }
     center img {
-        width: 93%;
+        width: 82%;
         margin: 0 auto;
         display: block; 
     }
@@ -16,6 +16,11 @@
     .main-container {
         margin-top: 10px;
     }
+    .language img {
+        width: 93%;
+        margin: 0 auto;
+        display: block; 
+    }
 </style>
 <?php
 include './Connection/conn.php';
@@ -24,11 +29,11 @@ $queryMain = "SELECT * FROM MainMenu_Right_tbl ORDER BY sort_order DESC";
 $resultMain = mysqli_query($conn, $queryMain);
 
 echo '<div class="sidebarRight">'; // Opening div for Right sidebar
-echo '<div><center><a href=""><img src="./public/img/sr9.gif" border="0"></a></center></div>';
-echo '<div class="menu">'; 
+echo '<div class="language"><a href=""><img src="./public/img/sr9.gif" border="0"></a></div>'; 
+echo '<div><center><a href="https://belteigroup.com.kh/index2.htm"><img src="./public/img/sr3.png" border="0"></a></center></div>';
 while ($rowMain = mysqli_fetch_assoc($resultMain)) {
-    echo '<div><center><a href="https://belteigroup.com.kh/index2.htm"><img src="./public/img/sr3.png" border="0"></a></center></div>';
 
+    echo '<div class="menu">';
     echo '<div class="main-container">'; // Use a different class for the main container
     echo '<img src="./public/RightMenuimg/' . $rowMain['image'] . '" alt="">';
 
@@ -48,68 +53,12 @@ while ($rowMain = mysqli_fetch_assoc($resultMain)) {
     echo '</div>';
     echo '</div>';
 }
+echo '<br /> <p style="color: rgb(41,100,193); text-align: left;">
+&nbsp;&nbsp;&nbsp; យើងមាន ភ្ញៀវ 4 នាក់ <br/>
+&nbsp;&nbsp;&nbsp; កំពុងបើកមើល <br/> <br/>
+
+&nbsp;&nbsp;&nbsp; ចំនួនអ្នកមើល 376334</p> <br/> <br/>';
 
 echo '</div>';
+
 ?>
-
-
-
-<!-- <div class="sidebarRight">
-    <div class="container-fluid">
-        <img src="./public/img/sr9.gif" alt="">
-        <img src="./public/img/sr3.png" alt="">
-    </div>
-    <div class="container-fluid">
-        <img src="./public/img/sr17.png" alt="">
-        <img src="./public/img/sr4.png" alt="">
-        <img src="./public/img/sr6.png" alt="">
-        <img src="./public/img/sr5.png" alt="">
-    </div>
-    <div class="container-fluid">
-    <img src="./public/img/sr23.png" alt="">
-    <img src="./public/img/sr10.png" alt="">
-    <img src="./public/img/sr27.png" alt="">
-    <img src="./public/img/sr28.png" alt="">
-    <img src="./public/img/sr20.png" alt="">
-    <img src="./public/img/sr35.png" alt="">
-    <img src="./public/img/sr26.png" alt="">
-    <img src="./public/img/sr18.png" alt="">
-    <img src="./public/img/sr21.png" alt="">
-    </div>
-    <div class="container-fluid">
-    <img src="./public/img/sr31.png" alt="">
-    <img src="./public/img/sr33.png" alt="">
-    <img src="./public/img/sr29.png" alt="">
-    <img src="./public/img/sr2.png" alt="">
-    <img src="./public/img/sr1.png" alt="">
-    <img src="./public/img/sr11.png" alt="">
-    </div>
-    <div class="container-fluid">
-    <img src="./public/img/sr32.png" alt="">
-    <img src="./public/img/sr34.png" alt="">
-    <img src="./public/img/sr13.png" alt="">
-    <img src="./public/img/sr25.png" alt="">
-    </div>
-    <div class="container-fluid">
-    <img src="./public/img/sr22.png" alt="">
-    <img src="./public/img/sr36.png" alt="">
-    <img src="./public/img/sr24.png" alt="">
-    </div>
-    <div class="container-fluid">
-    <img src="./public/img/sr15.png" alt="">
-    <img src="./public/img/sr8.png" alt="">
-    <img src="./public/img/sr16.png" alt="">
-    </div>
-    <div class="container-fluid">
-    <img src="./public/img/sr14.png" alt="">
-    <img src="./public/img/sr12.png" alt="">
-    </div>
-    <div class="container-fluid">
-    <img src="./public/img/sr14.png" alt="">
-    <img src="./public/img/sr19.png" alt="">
-    </div>
-    <div class="container-fluid">
-    <img src="./public/img/sr7.png" alt="">
-    <img src="./public/img/sr30.png" alt="">
-    </div>
-</div> -->

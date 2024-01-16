@@ -5,29 +5,29 @@
 <html lang="en">
 <head>
 <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+<link rel="icon" href="./public/img/beltei_tours_in_cambodia.png">
     <script src='./public/main.js'></script>
     <?php include_once 'src/layouts/Home/Script.php'; ?>
     <style>
-        img {
+        /* .img {
             width: 100%;
-        }
+        } */
         .container-fluid {
             padding-bottom: 5px;
         }
         .container {
             background: white;
-            
         }
         body {
             background: #7BA46A;
-            width: 980px;
+            width: 970px;
             margin: 0 auto;
             margin-top: 25px;
         }
         .content {
             border-top: 0.5px dashed #7BA46A;
-            padding-left: 0;
-            padding-right: 0;
+            /* padding-left: 0;
+            padding-right: 0; */
         }
     </style>
 </head>

@@ -64,10 +64,13 @@
         }
         ?>
         <div class="btn-toolbar mb-2 mb-md-0">
+
           <div class="btn-group me-2">
+          <?php if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Manager') { ?>
           <button type="button" class="btn btn-sm btn-outline-secondary">
             <a href="<?= $addLink ?>">Add</a>
-        </button>
+            </button>
+          <?php } ?>
             <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?= getFullUrl('Admin/RightMenu') ?>">Back to Main</a></button>
           </div>
           <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
@@ -85,8 +88,10 @@
               <th scope="col">image</th>
               <th scope="col">title</th>
               <th scope="col">link</th>
+              <?php if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Manager') { ?>
               <th scope="col">Action</th>
               <th scope="col">Action</th>
+              <?php } ?>
             </tr>
           </thead>
           <tbody>
@@ -99,9 +104,11 @@
                 echo '<td>' . $row['sub_title'] . '</td>';
                 echo '<td>' . $row['link'] . '</td>';
                 echo "<td>";
+                if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Manager') {
                 echo "<a href='edit.php?id=" . $row['SubID'] . "'>Edit</a>";
                 echo "</td>";
                 echo "<td> | <a href='#' onclick=\"confirmDelete(" . $row['SubID'] . ")\">Delete</a></td>";
+                }
                 echo '</tr>';
             }
             ?>

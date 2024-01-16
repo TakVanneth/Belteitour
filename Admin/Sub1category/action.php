@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['insert'])) {
     $DatePost = $_POST['DatePost'];
     $MainCategoryID = $_POST['MainCategoryID'];
 
-    $targetDirectory = "./../../public/uploads/";
+    $targetDirectory = "./../../public/uploads";
     $uploadedFileName = $_FILES['Categoryimage']['name'];
     $tempName = $_FILES['Categoryimage']['tmp_name'];
     $fileExtension = pathinfo($uploadedFileName, PATHINFO_EXTENSION);

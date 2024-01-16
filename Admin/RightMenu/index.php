@@ -16,6 +16,7 @@
     $query = "SELECT * FROM MainMenu_Right_tbl ORDER BY sort_order DESC";
     $result = mysqli_query($conn, $query);
 ?>
+
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
 <head>
@@ -35,7 +36,9 @@
                     <h1 class="h2">Main Right Menu</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
+                                <?php if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Manager') { ?>
                             <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?=getFullUrl('Admin/RightMenu/add.php')?>">Add</a></button>
+                                 <?php } ?>
                             <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?=getFullUrl('Admin/RightMenu/SubMenu')?>">Sub Menu</a></button>
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
@@ -53,8 +56,10 @@
                                 <th scope="col">title</th>
                                 <th scope="col">link</th>
                                 <th scope="col">sub menu</th>
+                                <?php if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Manager') { ?>
                                 <th scope="col">Action</th>
                                 <th scope="col">Action</th>
+                                 <?php } ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,7 +71,7 @@
                                     echo '<td>' . $row['title'] . '</td>';
                                     echo '<td>' . $row['link'] . '</td>';
                                     echo '<td><a href="SubMenu/index.php?MainID=' . $row['MainID'] . '">views</a></td>';
-
+                                    if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Manager') { 
                                     $hasSubMenu = hasAssociatedSubMenu($conn, $row['MainID']);
                                     
                                     echo "<td>";
@@ -80,6 +85,7 @@
                                         echo " | <a href='#' onclick=\"confirmDelete(" . $row['MainID'] . ")\">Delete</a>";
                                     }
                                     echo "</td>";
+                                    }
                                     echo '</tr>';
                                 }
                             ?>

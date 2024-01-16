@@ -33,7 +33,9 @@
         <h1 class="h2">Sub1 Category</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
+          <?php if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Manager') { ?>
           <button type="button" class="btn btn-sm btn-outline-secondary"><a href="<?=getFullUrl('Admin/Sub1category/add.php')?>">Add</a></button>
+          <?php } ?>
             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
           </div>
           <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
@@ -54,7 +56,9 @@
               <th scope="col">DatePost</th>
               <th scope="col">Main Category</th>
               <th scope="col">Date</th>
+          <?php if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Manager') { ?>
               <th scope="col">Action</th>
+          <?php } ?>
             </tr>
           </thead>
           <tbody>
@@ -77,8 +81,10 @@
 
                 echo "</td>";
                 echo "<td>" . $row['Date'] . "</td>";
+                if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Manager') {
                 echo "<td>" . "<a href='edit.php?id=" . $row['Sub1CategoryID'] . "'>Edit</a>" 
                 . " | <a href='action.php?id=" . $row['Sub1CategoryID'] . "'>Delete</a>" . "</td>";
+                }
                 echo "</tr>";
                   }
               ?>

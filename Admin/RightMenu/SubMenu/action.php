@@ -1,11 +1,12 @@
 <?php
 include './../../../Connection/conn.php';
-
+error_reporting(E_ALL);
+ini_set('Display_errors', 1);
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['insert'])) {
     $title = $_POST['title'];
     $link = $_POST['link'];
     $sort_order = $_POST['sort_order'];
-    $MainID = $_POST['MainID'];
+    $category = $_POST['MainID'];
 
     $targetDirectory = "./../../../public/RightMenuimg/";
     $uploadedFileName = $_FILES['image']['name'];
@@ -16,9 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['insert'])) {
     $targetFilePath = $targetDirectory . $newFileName;
     
     if (move_uploaded_file($tempName, $targetFilePath)) {
-        $query = "INSERT INTO SubMenu_Right_tbl (title, link, sort_order, MainID, image) VALUES (?, ?, ?, ?, ?)";
+        
+        $query = "INSERT INTO SubMenu_Right_tbl (title, link, MainID, sort_order, image) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("ssiis", $title, $link, $sort_order, $MainID, $newFileName);
+        $stmt->bind_param("ssiis", $title, $link, $category, $sort_order, $newFileName);
     
         if ($stmt->execute()) {
             echo '<script>';
@@ -69,7 +71,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $id = $_POST['id'];
     $title = $_POST['title'];
-    $MainID = $_POST['MainID'];
+    $category = $_POST['MainID'];
     $link = $_POST['link'];
     $sort_order = $_POST['sort_order'];
 
@@ -98,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         if (move_uploaded_file($tempName, $targetFilePath)) {
             $updateQuery = "UPDATE SubMenu_Right_tbl SET title = ?, link = ?, image = ?, sort_order = ?, MainID = ? WHERE SubID = ?";
             $stmt = $conn->prepare($updateQuery);
-            $stmt->bind_param("sssiii", $title, $link, $newFileName, $sort_order, $MainID, $id);
+            $stmt->bind_param("sssiii", $title, $link, $newFileName, $sort_order, $category, $id);
         } else {
             echo "Error uploading file.";
             exit();
@@ -106,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     } else {
         $updateQuery = "UPDATE SubMenu_Right_tbl SET title = ?, link = ?, sort_order = ?, MainID = ? WHERE SubID = ?";
         $stmt = $conn->prepare($updateQuery);
-        $stmt->bind_param("ssiii", $title, $link, $sort_order, $MainID, $id);
+        $stmt->bind_param("ssiii", $title, $link, $sort_order, $category, $id);
     }
 
     if ($stmt->execute()) {

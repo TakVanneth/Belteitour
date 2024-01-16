@@ -1,87 +1,114 @@
-<div class="content">
-    <div class="row">
-        <img src="./public/img/welcome_to_beltei_tour.png" alt="">
-    </div>
+<?php
+try {
+    // Check if mainID and subID are set and not empty
+    if ($_SERVER["REQUEST_METHOD"] !== "GET" || !isset($_GET['mainID']) || !isset($_GET['subID']) || empty($_GET['mainID']) || empty($_GET['subID'])) {
+        // Display a welcome section with Bootstrap-styled divs, including images and links
+        ?>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <img class="img-fluid" src="./public/img/welcome_to_beltei_tour.png" alt="Welcome to BELTEI Tour">
+                </div>
+            </div>
 
-    <div class="row" style="text-align: center;">
-    <div class="col-6">
-        <img src="./public/img/tour_facebook.png" alt="">
-    </div>
-    <div class="col-6">
-        <img src="./public/img/beltei_youtube.png" alt="">
-    </div>
-    <p style="margin-top: 20px; color: rgb(41,100,193);">
-        Please click image below for more details<br><br>
-        Congratulations on the Weekend Trip of BELTEI Group<br><br>
-        Management Team to Sihanoukville by traveling on the PPSHV Expressway
-    </p><br/>
-</div>
-<div>
-<table style="padding:0px; width:100%;">
-<tbody> 
-<tr>	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1158:congratulations-on-the-weekend-trip-of-beltei-group-management-team&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1158.png" border="0" width="110" height="90">
-    	<font color="red">22/10/2022:</font>Congratulations on the Weekend Trip of BELTEI Group Management Team</a></td>
+            <div class="row text-center">
+                <div class="col-6">
+                    <a href="https://www.facebook.com/belteitour" target="_blank">
+                        <img class="img-fluid" src="./public/img/tour_facebook.png" alt="Facebook">
+                    </a>
+                </div>
+                <div class="col-6">
+                    <a href="https://www.youtube.com/user/BELTEIGROUP" target="_blank">
+                        <img class="img-fluid" src="./public/img/beltei_youtube.png" alt="YouTube">
+                    </a>
+                </div>
+            </div>
 
-	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1146:annual-party-of-beltei-group-on-the-upcoming-khmer-traditional-new-years-day-at-diamond-island&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1146.png" border="0" width="110" height="90">
-    	<font color="red">09/04/2016:</font>Annual Party of BELTEI Group on the upcoming Khmer Traditional New Year’s Day at Diamond Island...</a></td>
+            <div class="row" style="text-align: center;">
+                <div class="col-12">
+                    <p style="margin-top: 20px; color: rgb(41,100,193);">
+                        Please click the image below for more details<br><br>
+                        Congratulations on the Weekend Trip of BELTEI Group<br><br>
+                        Management Team to Sihanoukville by traveling on the PPSHV Expressway
+                    </p><br/>
+                </div>
+            </div>
+        </div>
+        <?php
+    } else {
+        // If mainID and subID are set, proceed with data retrieval
+        $mainID = $_GET['mainID'];
+        $subID = $_GET['subID'];
 
-</tr><tr>	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1145:annual-assembly-of-beitel-group-to-assess-its-work-in-2015-and-set-forth-new-goals-for&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1145.png" border="0" width="110" height="90">
-    	<font color="red">07/03/2016:</font>Annual Assembly of BEITEL Group to Assess Its Work in 2015 and Set Forth New Goals for...</a></td>
+        // Check if mainID is 44
+        if ($mainID == 44) {
+            // Include the database connection file
+            include './Connection/conn.php';
 
-	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1144:congratu-mr-ly-navuth-deputy-director-general-of-beltei-group-and-vice-president&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1144.png" border="0" width="110" height="90">
-    	<font color="red">11/12/2015:</font>Congratu- Mr. Ly Navuth, Deputy Director General of BELTEI Group and Vice President</a></td>
+            // Retrieve data from the About_tbl table based on subID
+            $sql = "SELECT * FROM About_tbl WHERE Sub1CategoryID = $subID";
+            $result = $conn->query($sql);
 
-</tr><tr>	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1142:the-studies-tour-of-pedagogues-of-the-municiple-pedagogical-phnom-penh&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1142.png" border="0" width="110" height="90">
-    	<font color="red">31/03/2014:</font>The Studies Tour of Pedagogues of the Municiple Pedagogical Phnom Penh</a></td>
+            // Check if records are found
+            if ($result->num_rows > 0) {
+                // Loop through each record and display content and images
+                while ($row = $result->fetch_assoc()) {
+                    $content = $row['content'];
 
-	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1140:trip-of-beltei-english-speaking-contest-winners-level-3-6-9-12&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1140.png" border="0" width="110" height="90">
-    	<font color="red">05/03/2014:</font>Trip of BELTEI English Speaking Contest Winners (Level 3, 6, 9, 12)...</a></td>
+                    // Display content and the first image
+                    ?>
+                    <div class='container'>
+                        <div class='row'>
+                            <div class='col-12'>
+                                <img class='img-fluid' style='width: 100%; margin-bottom: 10px; margin-top: 20px' src='./public/uploads/about/<?= $row['imagedetails_1'] ?>' alt='Image 1'>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-12'>
+                                <?= $content ?>
+                            </div>
+                        </div>
+                        <?php
+                        // Loop through image details columns and display them in pairs
+                        for ($i = 2; $i <= 10; $i += 2) {
+                            $imageDetails1 = $row["imagedetails_$i"];
+                            $imageDetails2 = $row["imagedetails_" . ($i + 1)];
 
-</tr><tr>	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1141:the-trip-of-alliance-pharama-cambodge-sihanouk-ville-o-chheuteal-beach-kos-breus-&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1141.png" border="0" width="110" height="90">
-    	<font color="red">14/02/2014:</font>The trip of Alliance Pharama Cambodge, Sihanouk Ville (O Chheuteal Beach, Kos Breus, ...)</a></td>
+                            // Check if both images are not empty
+                            if (!empty($imageDetails1) && !empty($imageDetails2)) {
+                                ?>
+                                <div class="row">
+                                    <div class='col-6'>
+                                        <img class='img-fluid' style='width: 100%; margin-bottom: 10px;' src='./public/uploads/about/<?= $imageDetails1 ?>' alt=''>
+                                    </div>
+                                    <div class='col-6'>
+                                        <img class='img-fluid' style='width: 100%; margin-bottom: 10px;' src='./public/uploads/about/<?= $imageDetails2 ?>' alt=''>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </div>
+                    <?php
+                }
+            } else {
+                // If no records found
+                ?>
+                <div class='container'>
+                    <div class='row'>
+                        <div class='col-12'>No records found</div>
+                    </div>
+                </div>
+                <?php
+            }
 
-	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1136:trip-of-mrs-moueng-phun-and-chan-khims-family-to-thailand&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1136.png" border="0" width="110" height="90">
-    	<font color="red">01/07/2013:</font>Trip of Mrs. Moueng Phun and Chan Khims' family to Thailand</a></td>
-
-</tr><tr>	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1135:the-study-tour-of-pedagogues-of-phnom-penh-pedagogical-center-23th-generation&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1135.png" border="0" width="110" height="90">
-    	<font color="red">21/05/2013:</font>The Study Tour of Pedagogues of Phnom Penh  Pedagogical Center 23th Generation</a></td>
-
-	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1134:the-trip-of-beltei-10-students-family-visited-kratie-loa-border-ratanakiri&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1134.png" border="0" width="110" height="90">
-    	<font color="red">21/05/2013:</font>The trip of BELTEI 10 Student’s family visited  Kratie-Loa border-Ratanakiri</a></td>
-
-</tr><tr>	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1133:students-from-beltei-to-visit-takeo-kep-kampot-and-sihanouk&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1133.png" border="0" width="110" height="90">
-    	<font color="red">21/05/2013:</font>Students from BELTEI to visit Takeo-Kep-Kampot and Sihanouk</a></td>
-
-	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1132:trip-of-doctor-chun-sombats-family-from-phnom-penh-to-preah-vihear-siem-reap-battambang-provinces&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1132.png" border="0" width="110" height="90">
-    	<font color="red">11/02/2013:</font>Doctor Chun Sombat’s family PP to Preah Vihear-Siem Reap-Battambang</a></td>
-
-</tr><tr>	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1036:the-study-tour-of-pedagogues-of-phnom-penh-pedagogical-center-23th-generation&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1036.png" border="0" width="110" height="90">
-    	<font color="red">09/01/2013:</font>The Study Tour of Pedagogues of Phnom Penh  Pedagogical Center 23th Generation</a></td>
-
-	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1127:2011-06-08-11-16-08&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1127.png" border="0" width="110" height="90">
-    	<font color="red">09/12/2012:</font>The Study Tour of Pedagogues of Phnom Penh Pedagogical Center 23th Generation</a></td>
-
-</tr><tr>	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1128:the-trip-of-cambodian-doctor-to-koh-kong-province&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1128.png" border="0" width="110" height="90">
-    	<font color="red">27/10/2012:</font>The trip of Cambodian Doctor to Koh Kong Province</a></td>
-
-	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1129:the-trip-of-receptionist-from-beltei-international-institute-to-siem-reap-angkor-&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1129.png" border="0" width="110" height="90">
-    	<font color="red">08/09/2012:</font>The trip of Receptionist from BELTEI to Siem Reap, Angkor </a></td>
-
-</tr><tr>	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1130:expatriate-teachers-of-beltei-to-siem-reap-angkor&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1130.png" border="0" width="110" height="90">
-    	<font color="red">20/06/2012:</font>Expatriate Teachers of  BELTEI to Siem Reap Angkor</a></td>
-
-	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1051:2011-06-08-11-16-08&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1051.png" border="0" width="110" height="90">
-    	<font color="red">06/06/2012:</font>Retreat of Women’s Media Centre of Cambodia Staff to Kompot,and Kep Provinces</a></td>
-
-</tr><tr>	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1131:khmer-teachers-of-beltei-international-institute-to-siem-reap-angkor&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1131.png" border="0" width="110" height="90">
-    	<font color="red">07/04/2012:</font>Khmer Teachers of BELTEI International Institute  to Siem Reap Angkor</a></td>
-
-	<td width="50%" style="border: 1px solid #00AFFF;"><a href="/bte/index.php?option=com_content&amp;view=article&amp;id=1023:mou-york-saint-john&amp;catid=106:special-events&amp;Itemid=511"><img style="float:left;" src="/bte/images/listimages/1023.png" border="0" width="110" height="90">
-    	<font color="red">24/03/2012:</font>BELTEI International Institute Team Leader (DE &amp; DK) to Koh Kong Province</a></td>
-
-</tr>
-</tbody>
-</table>
-        	
-		</div> 
-</div>
+            // Close the database connection
+            $conn->close();
+        }
+    }
+} catch (Exception $e) {
+    // Catch and display any exceptions that occur
+    echo 'Caught exception: ', $e->getMessage(), "\n";
+}
+?>
